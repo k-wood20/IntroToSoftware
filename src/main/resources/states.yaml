@@ -1,0 +1,608 @@
+single_state:
+
+  # ------ Drivetrain ------
+
+  st_drivetrain_zero:
+    behavior: bh_drivetrain_zero
+    behavior_config:
+      timeout_time: 1000
+      zeroing_threshold: 0.1
+
+  st_drivetrain_percent:
+    behavior: bh_drivetrain_percent
+
+  st_drivetrain_velocity:
+    behavior: bh_drivetrain_velocity
+
+  st_drivetrain_limelight_align:
+    behavior: bh_drivetrain_limelight_align
+    behavior_config:
+      limelight: ipv_limelight_turret
+
+
+  # ------ Pure Pursuit ------
+
+  st_drivetrain_center_centerback:
+    behavior: bh_drivetrain_pure_pursuit
+    behavior_config:
+      path_name: pt_center_centerback
+      reversed: true
+
+  st_drivetrain_centerback_trenchfar:
+    behavior: bh_drivetrain_pure_pursuit
+    behavior_config:
+      path_name: pt_centerback_trenchfar
+      reversed: true
+
+  st_drivetrain_trenchfar_trenchcenter:
+    behavior: bh_drivetrain_pure_pursuit
+    behavior_config:
+      path_name: pt_trenchfar_trenchcenter
+      reversed: false
+
+  st_drivetrain_trenchcenter_centerback:
+    behavior: bh_drivetrain_pure_pursuit
+    behavior_config:
+      path_name: pt_trenchcenter_centerback
+      reversed: false
+
+  st_drivetrain_trenchfar_centerback:
+    behavior: bh_drivetrain_pure_pursuit
+    behavior_config:
+      path_name: pt_trenchfar_centerback
+      reversed: false
+
+  st_drivetrain_right_trenchnear:
+    behavior: bh_drivetrain_pure_pursuit
+    behavior_config:
+      path_name: pt_right_trenchnear
+      reversed: true
+
+  st_drivetrain_right_trenchnear_trenchfar:
+    behavior: bh_drivetrain_pure_pursuit
+    behavior_config:
+      path_name: pt_right_trenchnear_trenchfar
+      reversed: true
+
+  st_drivetrain_right_trenchfar_trenchnear:
+    behavior: bh_drivetrain_pure_pursuit
+    behavior_config:
+      path_name: pt_right_trenchfar_trenchnear
+      reversed: false
+
+  # Sneak 8 Ball
+  st_drivetrain_left_leftopponenttrench:
+    behavior: bh_drivetrain_pure_pursuit
+    behavior_config:
+      path_name: pt_left_leftopponenttrench
+      reversed: true
+
+  st_drivetrain_leftopponenttrench_leftshoot:
+    behavior: bh_drivetrain_pure_pursuit
+    behavior_config:
+      path_name: pt_leftopponenttrench_leftshoot
+      reversed: false
+
+  st_drivetrain_leftshoot_leftgeneratorfar:
+    behavior: bh_drivetrain_pure_pursuit
+    behavior_config:
+      path_name: pt_leftshoot_leftgeneratorfar
+      reversed: true
+
+  st_drivetrain_leftgeneratorfar_leftgeneratorfarbackup:
+    behavior: bh_drivetrain_pure_pursuit
+    behavior_config:
+      path_name: pt_leftgeneratorfar_leftgeneratorfarbackup
+      reversed: false
+
+  st_drivetrain_leftgeneratorfarbackup_leftgeneratornear:
+    behavior: bh_drivetrain_pure_pursuit
+    behavior_config:
+      path_name: pt_leftgeneratorfarbackup_leftgeneratornear
+      reversed: true
+
+  st_drivetrain_leftgeneratornear_leftshoot:
+    behavior: bh_drivetrain_pure_pursuit
+    behavior_config:
+      path_name: pt_leftgeneratornear_leftshoot
+      reversed: false
+
+
+  # ------ Collector ------
+
+  st_collector_zero:
+    behavior: bh_collector_zero
+    behavior_config:
+      delay_time: 500
+      solenoid_position: true
+
+  st_collector_manual:
+    behavior: bh_collector_manual
+    behavior_config:
+      roller_intake_speed: 0.5
+      roller_eject_speed: -0.5
+
+  st_collector_floor_intake:
+    behavior: bh_collector_states
+    behavior_config:
+      solenoid_position: true
+      roller_speed: 0.9
+
+  st_collector_wall_intake:
+    behavior: bh_collector_states
+    behavior_config:
+      solenoid_position: true
+      roller_speed: -0.2
+
+  st_collector_retract:
+    behavior: bh_collector_states
+    behavior_config:
+      solenoid_position: false
+      roller_speed: 0.0
+
+  st_collector_extend:
+    behavior: bh_collector_states
+    behavior_config:
+      solenoid_position: true
+      roller_speed: 0.0
+
+  st_collector_stop:
+    behavior: bh_collector_states
+    behavior_config:
+      solenoid_position: true
+      roller_speed: 0.0
+
+  st_collector_eject:
+    behavior: bh_collector_states
+    behavior_config:
+      solenoid_position: true
+      roller_speed: -0.2
+
+  st_collector_dejam:
+    behavior: bh_collector_states
+    behavior_config:
+      roller_speed: -0.2
+      solenoid_position: true
+
+
+  # ------ Hopper ------
+
+  st_hopper_zero:
+    behavior: bh_hopper_zero
+    behavior_config:
+      zeroing_threshold: 0.1
+      timeout_time: 1000
+      position_timeout_time: 500
+      zero_speed: 0.0
+
+  st_hopper_home:
+    behavior: bh_hopper_home
+    behavior_config:
+      rotation_speed: 0.5
+      timeout_time: 3000
+
+  st_hopper_manual:
+    behavior: bh_hopper_manual
+
+  st_hopper_load_with_kicker:
+    behavior: bh_hopper_states
+    behavior_config:
+      rotation_speed: 0.5
+      kicker_position: true
+
+  st_hopper_load_without_kicker:
+    behavior: bh_hopper_states
+    behavior_config:
+      rotation_speed: 0.5
+      kicker_position: false
+
+  st_hopper_stop:
+    behavior: bh_hopper_states
+    behavior_config:
+      rotation_speed: 0.0
+      kicker_position: false
+
+  st_hopper_shoot_all:
+    behavior: bh_hopper_states
+    behavior_config:
+      rotation_speed: 2.0
+      kicker_position: true
+
+  st_hopper_dejam:
+    behavior: bh_hopper_states
+    behavior_config:
+      rotation_speed: -0.3
+      kicker_position: false
+
+
+  # ------ Elevator ------
+
+  st_elevator_zero:
+    behavior: bh_elevator_zero
+    behavior_config:
+      zeroing_threshold: 0.1
+      zeroing_timeout_time: 1000
+
+  st_elevator_manual:
+    behavior: bh_elevator_manual
+
+  st_elevator_load:
+    behavior: bh_elevator_states
+    behavior_config:
+      speed: 0.4
+      read_beam_sensor: true
+
+  st_elevator_prime:
+    behavior: bh_elevator_states
+    behavior_config:
+      speed: -0.2
+
+  st_elevator_wait_for_flywheels:
+    behavior: bh_elevator_states
+    behavior_config:
+      speed: 0.0
+      wait_for_flywheels: true
+
+  st_elevator_shoot_first:
+    behavior: bh_elevator_states
+    behavior_config:
+      speed: 1.0
+
+  st_elevator_emergency_dump:
+    behavior: bh_elevator_states
+    behavior_config:
+      speed: 1.0
+
+  st_elevator_shoot_all:
+    behavior: bh_elevator_states
+    behavior_config:
+      speed: 0.8
+
+  st_elevator_stop:
+    behavior: bh_elevator_states
+    behavior_config:
+      speed: 0.0
+
+  st_elevator_dejam:
+    behavior: bh_elevator_states
+    behavior_config:
+      speed: -0.5
+
+
+  # ------ Turret ------
+
+  st_turret_zero:
+    behavior: bh_turret_zero
+    behavior_config:
+      zeroing_threshold: 5.0
+      zeroing_start_moving_time: 500
+      zeroing_settle_time: 250
+      zeroing_timeout_time: 3000
+      zeroing_position_timeout_time: 2500
+      zeroing_velocity_threshold: 1.0
+      zeroing_speed: -0.3
+
+  st_turret_manual:
+    behavior: bh_turret_manual
+
+  st_turret_left:
+    behavior: bh_turret_positions
+    behavior_config:
+      position: 155.0
+      allow_adjust: true
+
+  st_turret_center:
+    behavior: bh_turret_positions
+    behavior_config:
+      position: 57.2
+      allow_adjust: true
+
+  st_turret_right:
+    behavior: bh_turret_positions
+    behavior_config:
+      position: 2.0
+      allow_adjust: true
+
+  st_turret_dejam:
+    behavior: bh_turret_positions
+    behavior_config:
+      position_left: 155.0
+      position_right: 2.0
+      allow_adjust: false
+
+  st_turret_load:
+    behavior: bh_turret_positions
+    behavior_config:
+      position: 2.0
+
+  st_turret_align:
+    behavior: bh_turret_align
+    behavior_config:
+      limelight: ipv_limelight_turret
+      odometry: ipv_odometry
+      turret_position_input: ipn_turret_position
+      turret_angle_offset: 57.2
+      allow_adjust: true
+
+
+  # ------ Flywheel ------
+
+  st_flywheel_zero:
+    behavior: bh_flywheel_zero
+    behavior_config:
+      zero_timeout_time: 0
+
+  st_flywheel_manual:
+    behavior: bh_flywheel_manual
+
+  st_flywheel_prime:
+    behavior: bh_flywheel_states
+    behavior_config:
+      velocity: 6000.0
+      limelight: ipv_limelight_turret
+      allow_adjust: true
+      velocity_profile: pr_prime
+      final_velocity_error: 200.0
+      percent_output: 0.9
+      turbo_velocity_cutoff: 5500
+
+  st_flywheel_shoot:
+    behavior: bh_flywheel_states
+    behavior_config:
+      velocity: 6000.0
+      allow_adjust: true
+      velocity_profile: pr_shoot
+      final_velocity_error: 500.0
+
+  st_flywheel_limelight_shoot:
+    behavior: bh_flywheel_states
+    behavior_config:
+      velocity: 6000.0
+      limelight: ipv_limelight_turret
+      allow_adjust: true
+      velocity_profile: pr_shoot
+      final_velocity_error: 2500.0
+
+  st_flywheel_emergency_dump:
+    behavior: bh_flywheel_states
+    behavior_config:
+      velocity: 2000.0
+      allow_adjust: true
+      velocity_profile: pr_prime
+      final_velocity_error: 500.0
+
+  st_flywheel_stop:
+    behavior: bh_flywheel_states
+    behavior_config:
+      coast: true
+      allow_adjust: false
+
+
+  # ------ Climber ------
+
+  st_climber_zero:
+    behavior: bh_climber_zero
+    behavior_config:
+      zeroing_threshold: 0.1
+
+  st_climber_manual:
+    behavior: bh_climber_manual
+
+  st_climber_states_manual:
+    behavior: bh_climber_states
+    behavior_config:
+      solenoid_position: true
+      allow_ratchet: true
+
+  st_climber_deploy:
+    behavior: bh_climber_states
+    behavior_config:
+      solenoid_position: false
+      setpoint: 0.0
+      allow_ratchet: false
+
+  st_climber_extend:
+    behavior: bh_climber_states
+    behavior_config:
+      solenoid_position: false
+      setpoint: 16.5
+      allow_ratchet: false
+
+  st_climber_lock_on:
+    behavior: bh_climber_states
+    behavior_config:
+      solenoid_position: false
+      setpoint: 13.2
+      allow_ratchet: false
+
+  st_climber_climb:
+    behavior: bh_climber_states
+    behavior_config:
+      setpoint: 0.0
+      allow_ratchet: true
+
+  st_climber_stop:
+    behavior: bh_climber_states
+    behavior_config:
+      allow_ratchet: false
+
+done_for_time_state:
+
+  # ------ Drivetrain ------
+
+  # ------ Collector ------
+
+  # ------ Hopper ------
+  wt_hopper_shoot_all:
+    state: st_hopper_shoot_all
+    state_timeout: 2800
+    max_timeout: 2800
+
+  # ------ Elevator ------
+  wt_elevator_prime:
+    state: st_elevator_prime
+    state_timeout: 500
+    max_timeout: 500
+
+  wt_elevator_shoot_first:
+    state: st_elevator_shoot_first
+    state_timeout: 0
+    max_timeout: 200
+
+  wt_elevator_emergency_dump:
+    state: st_elevator_emergency_dump
+    state_timeout: 500
+    max_timeout: 500
+
+  # ------ Turret ------
+
+  # ------ Flywheel ------
+
+  # ------ Climber ------
+
+  # ------ Parallels ------
+  wt_prime_to_shoot:
+    state: pl_prime_to_shoot
+    state_timeout: 0
+    max_timeout: 4000
+
+  wt_auto_final_shoot:
+    state: pl_shoot_all
+    state_timeout: 6000
+    max_timeout: 6000
+
+  # ------ Sequences ------
+
+parallel_state:
+
+  # ------ Collect ------
+  pl_elevator_hopper_load:
+    foreground_states: [st_elevator_load, st_hopper_load_with_kicker]
+
+  pl_collector_hopper_elevator_stop:
+    foreground_states: [st_elevator_stop, st_hopper_stop, st_collector_stop]
+
+  pl_collect_floor:
+    foreground_states: [sq_hopper_elevator_collect, st_collector_floor_intake]
+
+  pl_collect_wall:
+    foreground_states: [sq_hopper_elevator_collect, st_collector_wall_intake]
+
+  # ------ Prime ------
+  pl_priming_stop:
+    foreground_states: [st_flywheel_stop, st_drivetrain_percent, st_turret_center]
+
+  pl_prime_to_shoot:
+    foreground_states: [sq_hopper_elevator_flywheel_prime, st_turret_align]
+
+  pl_prime_no_elevator:
+    foreground_states: [sq_hopper_prime, st_flywheel_prime, st_turret_align]
+
+  # ------ Shoot ------
+  pl_shoot_all:
+    foreground_states: [sq_hopper_elevator_shoot_all, st_flywheel_limelight_shoot, st_turret_align]
+
+  # ------ Stop ------
+  pl_stop_all:
+    foreground_states: [st_collector_stop, st_hopper_stop, st_elevator_stop, st_flywheel_stop, st_turret_center]
+
+  pl_dejam_stop:
+    foreground_states: [st_collector_stop, st_hopper_stop, st_elevator_stop, st_turret_center]
+
+  # ------ Dejam ------
+  pl_dejam:
+    foreground_states: [st_collector_dejam, st_hopper_dejam, st_elevator_dejam, st_turret_dejam]
+
+  # ------ Emergency Dump ------
+  pl_prepare_for_emergency_dump:
+    foreground_states: [sq_elevator_prime_wait_for_flywheels, st_flywheel_emergency_dump]
+
+    # ------ Autos ------
+
+    # Anywhere 3 Ball None
+    # (Uses pieces of Center Right 8 Ball Straight)
+
+  # Far Right 8 Ball Straight
+  pl_prime_right_trenchnear:
+    foreground_states: [st_drivetrain_right_trenchnear, pl_prime_no_elevator]
+
+  pl_collect_right_trenchfar:
+    foreground_states: [st_drivetrain_right_trenchnear_trenchfar]
+    background_states: [st_flywheel_stop, pl_collect_floor]
+
+  pl_prime_right_trechfar_trenchnear:
+    foreground_states: [st_drivetrain_right_trenchfar_trenchnear, pl_prime_to_shoot]
+
+  # Center Right 8 Ball Straight
+  pl_prime_center_centerback:
+    foreground_states: [st_drivetrain_center_centerback, pl_prime_no_elevator]
+
+  pl_collect_center_trenchfar:
+    foreground_states: [st_drivetrain_centerback_trenchfar]
+    background_states: [st_flywheel_stop, pl_collect_floor]
+
+  pl_prime_trechfar_centerback:
+    foreground_states: [st_drivetrain_trenchfar_centerback, pl_prime_to_shoot]
+
+  # Center Left 8 Ball 2 Steal
+  pl_collect_left_leftopponenttrench:
+    foreground_states: [st_drivetrain_left_leftopponenttrench]
+    background_states: [st_flywheel_stop, pl_collect_floor]
+
+  pl_prime_leftopponenttrench_leftshoot:
+    foreground_states: [st_drivetrain_leftopponenttrench_leftshoot, pl_prime_to_shoot]
+
+  pl_collect_leftshoot_leftgeneratornear:
+    foreground_states: [st_drivetrain_leftshoot_leftgeneratorfar]
+    background_states: [st_flywheel_stop, pl_collect_floor]
+
+  pl_prime_leftgeneratornear_leftshoot:
+    foreground_states: [st_drivetrain_leftgeneratornear_leftshoot, pl_prime_to_shoot]
+
+sequencer_state:
+
+  # ------ Collect ------
+  sq_hopper_elevator_collect:
+    sequence: [st_elevator_wait_for_flywheels, pl_elevator_hopper_load, st_elevator_stop, st_hopper_load_without_kicker]
+
+  # ------ Prime ------
+  sq_hopper_prime:
+    sequence: [st_hopper_home, st_hopper_stop]
+
+  sq_elevator_prime_wait_for_flywheels:
+    sequence: [wt_elevator_prime, st_elevator_stop]
+
+  sq_hopper_elevator_flywheel_prime:
+    sequence: [sq_hopper_prime, sq_elevator_prime_wait_for_flywheels, st_flywheel_prime]
+
+  # ------ Shoot ------
+  sq_hopper_elevator_shoot_all:
+    sequence: [wt_elevator_shoot_first, st_elevator_shoot_all, wt_hopper_shoot_all]
+
+  # ------ Stop ------
+
+  # ------ Dejam ------
+
+  # ------ Emergency Dump ------
+  sq_emergency_dump:
+    sequence: [pl_prepare_for_emergency_dump, wt_elevator_emergency_dump, st_elevator_stop, sq_hopper_prime]
+
+  # ------ Autos ------
+  sq_leftshoot_leftgeneratornear:
+    sequence: [st_drivetrain_leftshoot_leftgeneratorfar]
+
+  # Anywhere 3 Ball None
+  sq_auto_anywhere_3ball_none:
+    sequence: [pl_prime_center_centerback, pl_shoot_all, pl_stop_all, st_drivetrain_percent]
+
+  # Far Right 8 Ball Straight
+  sq_auto_farright_8ball_straight:
+    sequence: [pl_prime_right_trenchnear, pl_shoot_all, pl_collect_right_trenchfar, pl_prime_right_trechfar_trenchnear, st_drivetrain_percent, st_collector_stop, wt_auto_final_shoot, pl_stop_all]
+
+  # Center Right 8 Ball Straight
+  sq_auto_centerright_8ball_straight:
+    sequence: [pl_prime_center_centerback, pl_shoot_all, pl_collect_center_trenchfar, pl_prime_trechfar_centerback, st_drivetrain_percent, st_collector_stop, wt_auto_final_shoot, pl_stop_all]
+
+  # Center Left 8 Ball 2 Steal
+  sq_auto_centerleft_8ball_2steal:
+    sequence: [pl_collect_left_leftopponenttrench, pl_prime_leftopponenttrench_leftshoot, st_collector_stop, pl_shoot_all, pl_collect_leftshoot_leftgeneratornear, pl_prime_leftgeneratornear_leftshoot, st_collector_stop, st_drivetrain_percent, wt_auto_final_shoot, pl_stop_all]
