@@ -5,48 +5,10 @@ general:
   states:
 
     sequences:
-      priority_level_3: [sq_emergency_dump,
-                         sq_auto_anywhere_3ball_none, sq_auto_farright_8ball_straight, sq_auto_centerright_8ball_straight, sq_auto_centerleft_8ball_2steal]
-      priority_level_1: [sq_hopper_elevator_collect, sq_hopper_prime, sq_elevator_prime_wait_for_flywheels, sq_hopper_elevator_flywheel_prime, sq_hopper_elevator_shoot_all]
-    parallels:
-      priority_level_4: [pl_dejam]
-      priority_level_3: [pl_shoot_all]
-      priority_level_2: [pl_collect_floor, pl_collect_wall, wt_prime_to_shoot, pl_prime_to_shoot]
-      priority_level_1: [pl_elevator_hopper_load, pl_prime_no_elevator, pl_dejam_stop, pl_stop_all, pl_priming_stop, pl_collector_hopper_elevator_stop, pl_prepare_for_emergency_dump,
-                         pl_collect_right_trenchfar, pl_prime_right_trenchnear, pl_prime_right_trechfar_trenchnear,
-                         pl_collect_center_trenchfar, pl_prime_center_centerback, pl_prime_trechfar_centerback,
-                         pl_collect_left_leftopponenttrench, pl_prime_leftopponenttrench_leftshoot, pl_collect_leftshoot_leftgeneratornear, pl_prime_leftgeneratornear_leftshoot]
-    ss_drivetrain:
-      priority_level_2: [st_drivetrain_limelight_align]
-      priority_level_1: [st_drivetrain_zero, st_drivetrain_percent, st_drivetrain_velocity,
-                         st_drivetrain_right_trenchnear, st_drivetrain_right_trenchnear_trenchfar, st_drivetrain_right_trenchfar_trenchnear,
-                         st_drivetrain_center_centerback, st_drivetrain_centerback_trenchfar, st_drivetrain_trenchfar_trenchcenter, st_drivetrain_trenchcenter_centerback, st_drivetrain_trenchfar_centerback,
-                         st_drivetrain_left_leftopponenttrench, st_drivetrain_leftopponenttrench_leftshoot, st_drivetrain_leftshoot_leftgeneratorfar, st_drivetrain_leftgeneratorfar_leftgeneratorfarbackup, st_drivetrain_leftgeneratorfarbackup_leftgeneratornear, st_drivetrain_leftgeneratornear_leftshoot]
-      default: [st_drivetrain_percent]
-    ss_collector:
-      priority_level_2: [st_collector_extend, st_collector_retract]
-      priority_level_1: [st_collector_manual, st_collector_zero, st_collector_floor_intake, st_collector_wall_intake, st_collector_eject, st_collector_dejam]
-      default: [st_collector_stop]
-    ss_hopper:
-      priority_level_1: [st_hopper_manual, st_hopper_zero, st_hopper_home, st_hopper_dejam, st_hopper_load_with_kicker, st_hopper_load_without_kicker, st_hopper_shoot_all, wt_hopper_shoot_all, wt_auto_final_shoot]
-      default: [st_hopper_stop]
-    ss_elevator:
-      priority_level_1: [st_elevator_manual, st_elevator_zero, st_elevator_dejam, st_elevator_load, st_elevator_prime, st_elevator_shoot_first, st_elevator_shoot_all, wt_elevator_prime, wt_elevator_shoot_first, wt_elevator_emergency_dump, st_elevator_emergency_dump, st_elevator_wait_for_flywheels]
-      default: [st_elevator_stop]
-    ss_turret:
-      priority_level_2: [st_turret_zero, st_turret_dejam, st_turret_align]
-      priority_level_1: [st_turret_manual, st_turret_load]
-      default: [st_turret_center]
-    ss_flywheel:
-      priority_level_2: [st_flywheel_zero, st_flywheel_shoot, st_flywheel_limelight_shoot]
-      priority_level_1: [st_flywheel_manual, st_flywheel_prime, st_flywheel_emergency_dump]
-      default: [st_flywheel_stop]
-    ss_climber:
-      priority_level_1: [st_climber_manual, st_climber_zero, st_climber_states_manual]
-      # st_climber_deploy, st_climber_extend, st_climber_lock_on, st_climber_climb
-      default: [st_climber_stop]
 
-  subsystems: [ss_drivetrain, ss_collector, ss_hopper, ss_elevator, ss_turret, ss_flywheel, ss_climber]
+    parallels:
+
+  subsystems: []
 
   input_booleans: [
     ipb_driver_a, ipb_driver_b, ipb_driver_y, ipb_driver_x, ipb_driver_left_bumper, ipb_driver_right_bumper, ipb_driver_left_trigger, ipb_driver_right_trigger, ipb_driver_dpad_up, ipb_driver_dpad_down, ipb_driver_dpad_left, ipb_driver_dpad_right, ipb_driver_back, ipb_driver_start, ipb_driver_left_stick_button, ipb_driver_right_stick_button,
@@ -59,11 +21,11 @@ general:
     ipn_operator_left_y, ipn_operator_left_x, ipn_operator_right_y, ipn_operator_right_x
   ]
 
-  input_vectors: [ipv_odometry, ipv_navx, ipv_limelight_turret]
+  input_vectors: []
 
-  output_numerics: [opn_drivetrain_left, opn_drivetrain_right, opn_collector_rollers, opn_hopper, opn_elevator, opn_flywheel, opn_turret, opn_climber_winch, opn_climb_roller]
+  output_numerics: []
 
-  output_booleans: [opb_drivetrain_gear_shifter, opb_collector_extend, opb_hopper_kicker, opb_climber_deploy_and_ratchet]
+  output_booleans: []
 
 
 global_timing:
@@ -75,148 +37,13 @@ global_timing:
   frame_cycle_time_threshold_core_thread: 80
   frame_cycle_time_threshold_info_thread: 80
 
-global_drivetrain:
-  x: ipn_driver_right_x
-  y: ipn_driver_left_y
-  gear_shift_button: ipb_driver_left_trigger
-  velocity_mode_button: ipb_driver_right_trigger
-  limelight_align_mode_button: ipb_driver_left_bumper
-  pure_pursuit_track_width: 30.0
-
-global_collector:
-  deploy_button: ipb_operator_left_trigger
-  roller_speed_button: ipb_operator_left_bumper
-
-global_hopper:
-  increment_speed_up_button: ipb_operator_b
-  increment_speed_down_button: ipb_operator_x
-  enabled_button: ipb_operator_right_bumper
-  initial_speed: 0.0
-  increment_speed: 0.1
-  kicker_button: ipb_operator_right_trigger
-  start_moving_timer_length: 750
-  dejam_timer_length: 1000
-  dejam_speed: -0.5
-  jam_threshold: 0.1
-
-global_elevator:
-  enabled_button: ipb_operator_right_bumper
-  increment_up_button: ipb_operator_y
-  increment_down_button: ipb_operator_a
-  initial_speed: 0.0
-  elevator_increment: 0.1
-
-global_turret:
-  micro_axis: ipn_operator_right_y
-  macro_axis: ipn_operator_right_x
-  y_axis_scalar: 0.1
-
-global_flywheel:
-  micro_adjust_axis: ipn_operator_left_x
-  macro_adjust_axis: ipn_operator_left_y
-  initial_speed: 0.0
-  y_axis_scalar: 10.0
-  speed_profile:
-    10.0: 6250
-    15.0: 5150
-    18.0: 5100
-    24.0: 6000
-
-global_climber:
-  manual_axis: ipn_operator_left_y
-  deploy_and_break_button: ipb_operator_y
-  error_threshold: 0.5
-  y_axis_scalar_manual: 1.0
-  y_axis_scalar_states: 0.005
-
 log:
-#  ips_selected_auto: true
-#  ipb_robot_has_been_zeroed: true
-#  ipb_use_parallax_adjustment: true
-#  ipb_drivetrain_safe_temperature: true
-#  ipn_turret_position: true
-#  ipn_flywheel_primary_velocity: true
-#  ipb_turret_limelight_locked: true
-#  ipb_turret_aligned: true
-#  ipb_flywheel_primed: true
-#  ipb_primed_to_shoot: true
-#  ipb_endgame_enabled: true
-
 
 global_webdashboard:
 
   auto_selector:
-    origins: [Anywhere, Far Right, Center Right, Center Left, Far Left]
-    destinations: [3 Ball, 8 Ball, 10 Ball]
-    actions: [None, Straight, 2 Generator, 2 Steal, 3 Steal]
+    origins: []
+    destinations: []
+    actions: []
 
   match_values:
-
-    ips_selected_auto:
-      display_name: Auto
-      type: auto
-
-    ipb_robot_has_been_zeroed:
-      display_name: Robot Zeroed
-      type: boolean
-
-    ipb_use_parallax_adjustment:
-      display_name: Use Parallax
-      type: boolean
-
-    ipb_use_limelight_targeting:
-      display_name: Use Limelight
-      type: boolean
-
-    ipb_use_navx_alignment:
-      display_name: Use Navx
-      type: boolean
-
-    ipb_drivetrain_safe_temperature:
-      display_name: Drivetrain Safe Temp
-      type: boolean
-
-    ipb_endgame_enabled:
-      display_name: Climb Enabled
-      type: boolean
-
-    ipb_climber_ratchet_deployed:
-      display_name: Ratchet Engaged
-      type: boolean
-
-    ipn_turret_position:
-      display_name: Turret Position
-      type: value
-
-    ipn_flywheel_primary_velocity:
-      display_name: Flywheel Velocity
-      type: value
-
-    ipn_drivetrain_temperature:
-      display_name: Drivetrain Temperature
-      type: value
-
-    ipn_flywheel_primary_temperature:
-      display_name: Flywheel Temperature
-      type: value
-
-    logger:
-      type: log
-      display_name: Logger
-      level: INFO
-
-    ipb_turret_limelight_locked:
-      display_name: Limelight
-      type: other
-
-    ipb_turret_aligned:
-      display_name: Turret
-      type: other
-
-    ipb_flywheel_primed:
-      display_name: Flywheel
-      type: other
-
-    ipb_primed_to_shoot:
-      display_name: Primed
-      type: other
