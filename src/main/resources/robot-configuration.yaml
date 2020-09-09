@@ -16,7 +16,7 @@ general:
 
   input_booleans: [ipb_driver_right_trigger]
 
-  input_numerics: [ipn_driver_left_x, ipn_driver_left_y]
+  input_numerics: [ipn_driver_right_x, ipn_driver_left_y]
 
   input_vectors: []
 
