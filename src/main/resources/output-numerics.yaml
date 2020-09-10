@@ -1,5 +1,27 @@
 talon:
+  opn_drivetrain_left_primary:
+    device_number: 0
+    inverted: true
+
+  opn_drivetrain_left_follower_1:
+    device_number: 1
+    inverted: true
+
+  opn_drivetrain_right_primary:
+    device_number: 14
+    inverted: false
+
+  opn_drivetrain_right_follower_1:
+    device_number: 15
+    inverted: false
 
 victor:
 
 motor_group:
+  opn_drivetrain_left:
+    master: opn_drivetrain_left_primary
+    followers: [opn_drivetrain_left_follower_1]
+
+  opn_drivetrain_right:
+    master: opn_drivetrain_right_primary
+    followers: [opn_drivetrain_right_follower_1]

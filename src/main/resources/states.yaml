@@ -1,7 +1,13 @@
 single_state:
 
+# ------ Drivetrain ------
+
+  st_drivetrain_percent:
+    behavior: bh_drivetrain_percent
+
 done_for_time_state:
 
 parallel_state:
 
 sequencer_state:
+

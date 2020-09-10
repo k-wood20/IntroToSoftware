@@ -5,27 +5,24 @@ general:
   states:
 
     sequences:
-
+      priority_level_1: []
     parallels:
+       priority_level_1: []
+    ss_drivetrain:
+      default: [st_drivetrain_percent]
 
-  subsystems: []
 
-  input_booleans: [
-    ipb_driver_a, ipb_driver_b, ipb_driver_y, ipb_driver_x, ipb_driver_left_bumper, ipb_driver_right_bumper, ipb_driver_left_trigger, ipb_driver_right_trigger, ipb_driver_dpad_up, ipb_driver_dpad_down, ipb_driver_dpad_left, ipb_driver_dpad_right, ipb_driver_back, ipb_driver_start, ipb_driver_left_stick_button, ipb_driver_right_stick_button,
-    ipb_operator_a, ipb_operator_b, ipb_operator_y, ipb_operator_x, ipb_operator_left_bumper, ipb_operator_right_bumper, ipb_operator_left_trigger, ipb_operator_right_trigger, ipb_operator_dpad_up, ipb_operator_dpad_down, ipb_operator_dpad_left, ipb_operator_dpad_right, ipb_operator_back, ipb_operator_start, ipb_operator_left_stick_button, ipb_operator_right_stick_button,
-    ipb_hopper_home_switch, ipb_elevator_beam_sensor
-  ]
+  subsystems: [ss_drivetrain]
 
-  input_numerics: [
-    ipn_driver_left_y, ipn_driver_left_x, ipn_driver_right_y, ipn_driver_right_x,
-    ipn_operator_left_y, ipn_operator_left_x, ipn_operator_right_y, ipn_operator_right_x
-  ]
+  input_booleans: [ipb_driver_right_trigger]
+
+  input_numerics: [ipn_driver_right_x, ipn_driver_left_y]
 
   input_vectors: []
 
-  output_numerics: []
+  output_numerics: [opn_drivetrain_left, opn_drivetrain_left]
 
-  output_booleans: []
+  output_booleans: [opb_drivetrain_gear_shifter]
 
 
 global_timing:
@@ -37,7 +34,14 @@ global_timing:
   frame_cycle_time_threshold_core_thread: 80
   frame_cycle_time_threshold_info_thread: 80
 
+global_drivetrain:
+  x: ipn_driver_right_x
+  y: ipn_driver_left_y
+  gear_shift: ipb_driver_left_trigger
+
+
 log:
+#  ips_selected_auto: true
 
 global_webdashboard:
 
@@ -47,3 +51,4 @@ global_webdashboard:
     actions: []
 
   match_values:
+
