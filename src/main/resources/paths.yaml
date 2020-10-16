@@ -1,81 +1,16 @@
-path:
-  pt_center_centerback:
-    path: [[0, 0], [-80, 0]]
-    model: standard
-
-  pt_centerback_trenchfar:
-    path: [[-80, 0], [-116, -70], [-240, -70], [-250, -75]]
-    model: standard
-    max_deceleration: 0.002
-
-  pt_trenchfar_trenchcenter:
-    path: [[-250, -75], [-240, -70], [-175, -70]]
-    model: standard
-    max_acceleration: 0.002
-
-  pt_trenchcenter_centerback:
-    path: [[-175, -70], [-116, -70], [-90, 0], [-65, 0]]
-    model: standard
-
-  pt_trenchfar_centerback:
-    path: [[-250, -75], [-240, -70], [-175, -70], [-116, -70], [-90, 0], [-65, 0]]
-    model: standard
-    max_acceleration: 0.002
-
-
-  pt_right_trenchnear:
-    path: [[0, 0], [-70, 0]]
-    model: standard
-
-  pt_right_trenchnear_trenchfar:
-    path: [[-70, 0], [-240, 0], [-250, -5]]
-    model: standard
-    max_deceleration: 0.002
-
-  pt_right_trenchfar_trenchnear:
-    path: [[-250, -5], [-240, 0], [-70, 0]]
-    model: standard
-    max_acceleration: 0.002
-
-  # Sneak 8 ball
-
-  pt_left_leftopponenttrench:
-    path: [[0, 0], [-59, 0], [-109, 56]]
-    model: standard
-
-  pt_leftopponenttrench_leftshoot:
-    path: [[-109, 56], [-59, 0], [-35, -116]]
-    model: standard
-
-  pt_leftshoot_leftgeneratorfar:
-    path: [[-35, -116], [-57, -35], [-97, -35], [-80, -90]]
-    model: generatorballs
-
-  pt_leftgeneratorfar_leftgeneratorfarbackup:
-    path: [[-70, -88], [-65, -86]]
-    model: generatorballs
-
-  pt_leftgeneratorfarbackup_leftgeneratornear:
-    path: [[-65, -86], [-67, -100]]
-    model: generatorballs
-
-  pt_leftgeneratornear_leftshoot:
-    path: [[-80, -90], [-97, -55], [-57, -55], [-35, -116]]
-    model: standard
-
-
-model:
-  standard:
-    spacing: 2.0
-    smoothing: 0.5
-    max_acceleration: 0.005
-    max_deceleration: 0.005
-    tracking_error_speed: 5.0
-    min_speed: 0.2
-    max_speed: 1.0
-    turn_speed: 0.02
-    look_ahead_distance: 30.0
-
-  generatorballs:
-    model: standard
-    max_speed: 1.0
+#path:
+#  pt_center_centerback:
+#    path: [[0, 0], [-80, 0]]
+#    model: standard
+#
+#model:
+#  standard:
+#    spacing: 2.0
+#    smoothing: 0.5
+#    max_acceleration: 0.005
+#    max_deceleration: 0.005
+#    tracking_error_speed: 5.0
+#    min_speed: 0.2
+#    max_speed: 1.0
+#    turn_speed: 0.02
+#    look_ahead_distance: 30.0

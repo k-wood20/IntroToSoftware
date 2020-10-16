@@ -8,21 +8,23 @@ general:
       priority_level_1: []
     parallels:
        priority_level_1: []
-    ss_drivetrain:
-      default: [st_drivetrain_percent]
+    ss_example:
+      priority_level_2: []
+      priority_level_1: [st_example]
+      default: [st_example_default]
 
 
-  subsystems: [ss_drivetrain]
+  subsystems: [ss_example]
 
-  input_booleans: [ipb_driver_right_trigger]
+  input_booleans: [ipb_operator_right_trigger, ipb_operator_left_trigger]
 
-  input_numerics: [ipn_driver_right_x, ipn_driver_left_y]
+  input_numerics: []
 
   input_vectors: []
 
-  output_numerics: [opn_drivetrain_left, opn_drivetrain_left]
+  output_numerics: []
 
-  output_booleans: [opb_drivetrain_gear_shifter]
+  output_booleans: [opb_example]
 
 
 global_timing:
@@ -34,11 +36,8 @@ global_timing:
   frame_cycle_time_threshold_core_thread: 80
   frame_cycle_time_threshold_info_thread: 80
 
-global_drivetrain:
-  x: ipn_driver_right_x
-  y: ipn_driver_left_y
-  gear_shift: ipb_driver_left_trigger
-
+global_example:
+  what_this_button_does: ipb_operator_left_trigger
 
 log:
 #  ips_selected_auto: true
