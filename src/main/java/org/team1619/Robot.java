@@ -38,7 +38,6 @@ import org.uacr.utilities.services.managers.ServiceManager;
 
 public class Robot extends TimedRobot {
 
-	private static final Logger sLogger = LogManager.getLogger(Robot.class);
 	private final UACRRobot fUacrRobot;
 
 	public Robot() {
@@ -51,11 +50,7 @@ public class Robot extends TimedRobot {
 
 	@Override
 	public void robotInit() {
-		sLogger.info("Starting services");
-		fUacrRobot.getServiceManager().start();
-		fUacrRobot.getServiceManager().awaitHealthy();
-
-		sLogger.info("********************* ALL SERVICES STARTED *******************************");
+		fUacrRobot.start();
 	}
 
 	@Override

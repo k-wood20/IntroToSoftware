@@ -12,23 +12,12 @@ import org.uacr.services.input.InputService;
 import org.uacr.services.output.OutputService;
 import org.uacr.services.states.StatesService;
 import org.uacr.services.webdashboard.WebDashboardService;
-import org.uacr.shared.abstractions.EventBus;
-import org.uacr.shared.abstractions.FMS;
-import org.uacr.shared.abstractions.HardwareFactory;
-import org.uacr.shared.abstractions.InputValues;
-import org.uacr.shared.abstractions.ObjectsDirectory;
-import org.uacr.shared.abstractions.OutputValues;
-import org.uacr.shared.abstractions.RobotConfiguration;
-import org.uacr.shared.concretions.SharedEventBus;
-import org.uacr.shared.concretions.SharedFMS;
-import org.uacr.shared.concretions.SharedHardwareFactory;
-import org.uacr.shared.concretions.SharedInputValues;
-import org.uacr.shared.concretions.SharedObjectsDirectory;
-import org.uacr.shared.concretions.SharedOutputValues;
-import org.uacr.shared.concretions.SharedRobotConfiguration;
+import org.uacr.shared.abstractions.*;
+import org.uacr.shared.concretions.*;
 import org.uacr.utilities.Config;
 import org.uacr.utilities.YamlConfigParser;
 import org.uacr.utilities.logging.LogManager;
+import org.uacr.utilities.logging.Logger;
 import org.uacr.utilities.services.ScheduledMultiService;
 import org.uacr.utilities.services.Scheduler;
 import org.uacr.utilities.services.managers.AsyncServiceManager;
@@ -39,92 +28,100 @@ import org.uacr.utilities.services.managers.ServiceManager;
  * TODO deduplicate UACRRobot buildHardwareRobot() and buildSimRobot()
  */
 public class UACRRobot {
-  private final ServiceManager serviceManager;
-  private final FMS fms;
 
-  public UACRRobot(ServiceManager serviceManager, FMS fms) {
-    this.serviceManager = serviceManager;
-    this.fms = fms;
-  }
+    private static final Logger sLogger = LogManager.getLogger(UACRRobot.class);
 
-  public ServiceManager getServiceManager() {
-    return serviceManager;
-  }
+    private ServiceManager mServiceManager;
+    private FMS mFms;
+    private RobotConfiguration mRobotConfiguration;
+    private InputValues mInputValues;
+    private OutputValues mOutputValues;
+    private HardwareFactory mHardwareFactory;
+    private EventBus mEventBus;
+    private ObjectsDirectory mObjectsDirectory;
+    private StateControls mStateControls;
+    private AbstractModelFactory mModelFactory;
+    private LoggingService mLoggingService;
 
-  public FMS getFms() {
-    return fms;
-  }
-
-  public static UACRRobot buildHardwareRobot() {
-    YamlConfigParser parser = new YamlConfigParser();
-    parser.load("general.yaml");
-
-    Config loggerConfig = parser.getConfig("logger");
-    if (loggerConfig.contains("log_level")) {
-      LogManager.setLogLevel(loggerConfig.getEnum("log_level", LogManager.Level.class));
+    public void start() {
+        sLogger.info("Starting services");
+        mServiceManager.start();
+        mServiceManager.awaitHealthy();
+        sLogger.info("********************* ALL SERVICES STARTED *******************************");
     }
 
-    // Move to shared static builder method
-    FMS fms = new SharedFMS();
-    RobotConfiguration robotConfiguration = new SharedRobotConfiguration();
-    InputValues inputValues = new SharedInputValues();
-    OutputValues outputValues = new SharedOutputValues();
-    HardwareFactory hardwareFactory = new SharedHardwareFactory();
-    EventBus eventBus = new SharedEventBus();
-    ObjectsDirectory objectsDirectory = new SharedObjectsDirectory();
+    private static UACRRobot buildCommonRobot() {
+        YamlConfigParser parser = new YamlConfigParser();
+        parser.load("general.yaml");
 
-    AbstractModelFactory modelFactory = new RobotModelFactory(hardwareFactory, inputValues, outputValues, robotConfiguration, objectsDirectory);
-    StateControls stateControls = new StateControls(inputValues, robotConfiguration);
+        Config loggerConfig = parser.getConfig("logger");
+        if (loggerConfig.contains("log_level")) {
+            LogManager.setLogLevel(loggerConfig.getEnum("log_level", LogManager.Level.class));
+        }
 
-    StatesService statesService = new StatesService(modelFactory, inputValues, fms, robotConfiguration, objectsDirectory, stateControls);
-    InputService inputService = new InputService(modelFactory, inputValues, robotConfiguration, objectsDirectory);
-    Dashboard dashboard = new RobotDashboard(inputValues);
-    OutputService outputService = new OutputService(modelFactory, fms, inputValues, outputValues, robotConfiguration, objectsDirectory);
+        UACRRobot robot = new UACRRobot();
 
-    LoggingService loggingService = new LoggingService(inputValues, outputValues, robotConfiguration, dashboard);
-    WebDashboardService webDashboardService = new WebDashboardService(eventBus, fms, inputValues, outputValues, robotConfiguration);
+        robot.mFms = new SharedFMS();
+        robot.mRobotConfiguration = new SharedRobotConfiguration();
+        robot.mInputValues = new SharedInputValues();
+        robot.mOutputValues = new SharedOutputValues();
+        robot.mHardwareFactory = new SharedHardwareFactory();
+        robot.mEventBus = new SharedEventBus();
+        robot.mObjectsDirectory = new SharedObjectsDirectory();
+        robot.mStateControls = new StateControls(robot.mInputValues, robot.mRobotConfiguration);
 
-    ScheduledMultiService coreService = new ScheduledMultiService(new Scheduler(10), inputService, statesService, outputService);
-    ScheduledMultiService infoService = new ScheduledMultiService(new Scheduler(30), loggingService, webDashboardService);
-
-    ServiceManager serviceManager = new AsyncServiceManager(coreService, infoService);
-
-    return new UACRRobot(serviceManager, fms);
-  }
-
-  public static UACRRobot buildSimRobot() {
-    YamlConfigParser parser = new YamlConfigParser();
-    parser.load("general.yaml");
-
-    Config loggerConfig = parser.getConfig("logger");
-    if (loggerConfig.contains("log_level")) {
-      LogManager.setLogLevel(loggerConfig.getEnum("log_level", LogManager.Level.class));
+        return robot;
     }
 
-    RobotConfiguration robotConfiguration = new SharedRobotConfiguration();
-    FMS fms = new SharedFMS();
-    InputValues inputValues = new SharedInputValues();
-    OutputValues outputValues = new SharedOutputValues();
-    HardwareFactory hardwareFactory = new SharedHardwareFactory();
-    EventBus eventBus = new SharedEventBus();
-    ObjectsDirectory objectsDirectory = new SharedObjectsDirectory();
+    private static void buildServiceManager(UACRRobot robot) {
+        StatesService statesService = new StatesService(robot.mModelFactory, robot.mInputValues, robot.mFms,
+                robot.mRobotConfiguration, robot.mObjectsDirectory, robot.mStateControls);
 
-    AbstractModelFactory modelFactory = new SimModelFactory(hardwareFactory, eventBus, inputValues, outputValues, robotConfiguration, objectsDirectory);
-    StateControls stateControls = new StateControls(inputValues, robotConfiguration);
+        InputService inputService = new InputService(robot.mModelFactory, robot.mInputValues, robot.mRobotConfiguration,
+                robot.mObjectsDirectory);
 
-    StatesService statesService = new StatesService(modelFactory, inputValues, fms, robotConfiguration, objectsDirectory, stateControls);
-    InputService inputService = new InputService(modelFactory, inputValues, robotConfiguration, objectsDirectory);
-    OutputService outputService = new OutputService(modelFactory, fms, inputValues, outputValues, robotConfiguration, objectsDirectory);
+        OutputService outputService = new OutputService(robot.mModelFactory, robot.mFms, robot.mInputValues,
+                robot.mOutputValues, robot.mRobotConfiguration, robot.mObjectsDirectory);
 
-    Dashboard dashboard = new SimDashboard();
-    LoggingService loggingService = new LoggingService(inputValues, outputValues, robotConfiguration, dashboard);
-    WebDashboardService webDashboardService = new WebDashboardService(eventBus, fms, inputValues, outputValues, robotConfiguration);
+        WebDashboardService webDashboardService = new WebDashboardService(robot.mEventBus, robot.mFms,
+                robot.mInputValues, robot.mOutputValues, robot.mRobotConfiguration);
 
-    ScheduledMultiService coreService = new ScheduledMultiService(new Scheduler(10), inputService, statesService, outputService);
-    ScheduledMultiService infoService = new ScheduledMultiService(new Scheduler(30), loggingService, webDashboardService);
+        robot.mServiceManager = new AsyncServiceManager(
+                new ScheduledMultiService(new Scheduler(10), inputService, statesService, outputService),
+                new ScheduledMultiService(new Scheduler(30), robot.mLoggingService, webDashboardService));
+    }
 
-    ServiceManager serviceManager = new AsyncServiceManager(coreService, infoService);
-    return new UACRRobot(serviceManager, fms);
-  }
+    public static UACRRobot buildHardwareRobot() {
 
+        UACRRobot robot = buildCommonRobot();
+
+        robot.mModelFactory = new RobotModelFactory(robot.mHardwareFactory, robot.mInputValues, robot.mOutputValues,
+                robot.mRobotConfiguration, robot.mObjectsDirectory);
+
+        robot.mLoggingService = new LoggingService(robot.mInputValues, robot.mOutputValues,
+                robot.mRobotConfiguration, new RobotDashboard(robot.mInputValues));
+
+        buildServiceManager(robot);
+
+        return robot;
+    }
+
+    public static UACRRobot buildSimRobot() {
+
+        UACRRobot robot = buildCommonRobot();
+
+        robot.mModelFactory = new SimModelFactory(robot.mHardwareFactory, robot.mEventBus, robot.mInputValues,
+                robot.mOutputValues, robot.mRobotConfiguration, robot.mObjectsDirectory);
+
+        robot.mLoggingService = new LoggingService(robot.mInputValues, robot.mOutputValues,
+                robot.mRobotConfiguration, new SimDashboard());
+
+        buildServiceManager(robot);
+
+        return robot;
+    }
+
+    public FMS getFms() {
+        return mFms;
+    }
 }
