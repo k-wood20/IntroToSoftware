@@ -3,6 +3,12 @@ package org.team1619;
 import edu.wpi.first.wpilibj.RobotBase;
 import edu.wpi.first.wpilibj.TimedRobot;
 
+import org.team1619.modelfactory.RobotModelFactory;
+import org.team1619.robot.FrcHardwareRobot;
+import org.team1619.state.StateControls;
+import org.uacr.robot.AbstractModelFactory;
+import org.uacr.robot.AbstractStateControls;
+import org.uacr.robot.RobotCore;
 import org.uacr.shared.abstractions.FMS;
 
 public class Robot extends TimedRobot {
@@ -10,7 +16,17 @@ public class Robot extends TimedRobot {
 	private final RobotCore fRobot;
 
 	public Robot() {
-		fRobot = new HardwareRobot();
+		fRobot = new FrcHardwareRobot() {
+			@Override
+			protected AbstractStateControls createStateControls() {
+				return new StateControls(fInputValues, fRobotConfiguration);
+			}
+
+			@Override
+			protected AbstractModelFactory createModelFactory() {
+				return new RobotModelFactory(fHardwareFactory, fInputValues, fOutputValues, fRobotConfiguration, fObjectsDirectory);
+			}
+		};
 	}
 
 	public static void main(String... args) {
