@@ -20,17 +20,17 @@ public class Behavior_Example implements Behavior {
 	private static final Logger sLogger = LogManager.getLogger(Behavior_Example.class);
 	private static final Set<String> sSubsystems = Set.of("ss_example");
 
-	private final InputValues fSharedInputValues;
-	private final OutputValues fSharedOutputValues;
-	private final String fWhatThisButtonDoes;
+	private final InputValues sharedInputValues;
+	private final OutputValues sharedOutputValues;
+	private final String whatThisButtonDoes;
 	private Timer mTimer;
 
 	private int mConfigurationValue;
 
 	public Behavior_Example(InputValues inputValues, OutputValues outputValues, Config config, RobotConfiguration robotConfiguration) {
-		fSharedInputValues = inputValues;
-		fSharedOutputValues = outputValues;
-		fWhatThisButtonDoes = robotConfiguration.getString("global_example", "what_this_button_does");
+		sharedInputValues = inputValues;
+		sharedOutputValues = outputValues;
+		whatThisButtonDoes = robotConfiguration.getString("global_example", "what_this_button_does");
 
 		mConfigurationValue = 0;
 		mTimer = new Timer();
@@ -46,8 +46,8 @@ public class Behavior_Example implements Behavior {
 
 	@Override
 	public void update() {
-		boolean whatThisButtonDoes = fSharedInputValues.getBoolean(fWhatThisButtonDoes);
-		fSharedInputValues.setBoolean("opb_example", whatThisButtonDoes);
+		boolean whatThisButtonDoes = sharedInputValues.getBoolean(this.whatThisButtonDoes);
+		sharedInputValues.setBoolean("opb_example", whatThisButtonDoes);
 	}
 
 	@Override

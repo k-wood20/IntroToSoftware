@@ -25,16 +25,16 @@ public class RobotStatus extends AbstractRobotStatus {
 	@Override
 	public void initialize() {
 		// Zero
-		if (!fSharedInputValues.getBoolean("ipb_robot_has_been_zeroed")) {
-//			fSharedInputValues.setBoolean("ipb_example_has_been_zeroed", false);
+		if (!sharedInputValues.getBoolean("ipb_robot_has_been_zeroed")) {
+//			sharedInputValues.setBoolean("ipb_example_has_been_zeroed", false);
 		}
 	}
 
 	@Override
 	public void update() {
-		if (!fSharedInputValues.getBoolean("ipb_robot_has_been_zeroed")
-				/*&& fSharedInputValues.getBoolean("ipb_example_has_been_zeroed")*/) {
-			fSharedInputValues.setBoolean("ipb_robot_has_been_zeroed", true);
+		if (!sharedInputValues.getBoolean("ipb_robot_has_been_zeroed")
+				/*&& sharedInputValues.getBoolean("ipb_example_has_been_zeroed")*/) {
+			sharedInputValues.setBoolean("ipb_robot_has_been_zeroed", true);
 		}
 	}
 

@@ -16,15 +16,15 @@ public class ModelFactory_Behaviors extends AbstractModelFactory {
 
 	private static final Logger sLogger = LogManager.getLogger(ModelFactory_Behaviors.class);
 
-	private final InputValues fSharedInputValues;
-	private final OutputValues fSharedOutputValues;
-	private final RobotConfiguration fRobotConfiguration;
+	private final InputValues sharedInputValues;
+	private final OutputValues sharedOutputValues;
+	private final RobotConfiguration robotConfiguration;
 
 	public ModelFactory_Behaviors(InputValues inputValues, OutputValues outputValues, RobotConfiguration robotConfiguration, ObjectsDirectory objectsDirectory) {
 		super(inputValues, outputValues, robotConfiguration, objectsDirectory);
-		fSharedInputValues = inputValues;
-		fSharedOutputValues = outputValues;
-		fRobotConfiguration = robotConfiguration;
+		sharedInputValues = inputValues;
+		sharedOutputValues = outputValues;
+		this.robotConfiguration = robotConfiguration;
 	}
 
 	public Behavior createBehavior(String name, Config config) {
@@ -33,7 +33,7 @@ public class ModelFactory_Behaviors extends AbstractModelFactory {
 		switch (name) {
 
 			case "bh_example":
-				return new Behavior_Example(fSharedInputValues, fSharedOutputValues, config, fRobotConfiguration);
+				return new Behavior_Example(sharedInputValues, sharedOutputValues, config, robotConfiguration);
 
 			// State not found
 			default:

@@ -12,12 +12,12 @@ public class Sim {
 		new FrcSimRobot() {
 			@Override
 			protected AbstractStateControls createStateControls() {
-				return new StateControls(fInputValues, fRobotConfiguration);
+				return new StateControls(inputValues, robotConfiguration);
 			}
 
 			@Override
 			protected AbstractModelFactory createModelFactory() {
-				return new SimModelFactory(fHardwareFactory, fEventBus, fInputValues, fOutputValues, fRobotConfiguration, fObjectsDirectory);
+				return new SimModelFactory(hardwareFactory, eventBus, inputValues, outputValues, robotConfiguration, objectsDirectory);
 			}
 		}.start();
 	}

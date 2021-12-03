@@ -34,16 +34,16 @@ public class AutonomousModeLogic extends AbstractModeLogic {
 		sLogger.info("***** AUTONOMOUS *****");
 
 		//Reads the values selected on the webdashboard and compiles them into the name of an auto.
-		mAutoOrigin = (fSharedInputValues.getString("ips_auto_origin").toLowerCase().replaceAll("\\s", ""));
-		mAutoDestination = (fSharedInputValues.getString("ips_auto_destination").toLowerCase().replaceAll("\\s", ""));
-		mAutoAction = (fSharedInputValues.getString("ips_auto_action").toLowerCase().replaceAll("\\s", ""));
+		mAutoOrigin = (sharedInputValues.getString("ips_auto_origin").toLowerCase().replaceAll("\\s", ""));
+		mAutoDestination = (sharedInputValues.getString("ips_auto_destination").toLowerCase().replaceAll("\\s", ""));
+		mAutoAction = (sharedInputValues.getString("ips_auto_action").toLowerCase().replaceAll("\\s", ""));
 		mCombinedAuto = "sq_auto_" + mAutoOrigin + "_" + mAutoDestination + "_" + mAutoAction;
 		if (mAutoOrigin.equals("doesnotexist") || mAutoDestination.equals("doesnotexist") || mAutoAction.equals("doesnotexist")) {
 			mCombinedAuto = "sq_auto_anywhere_3ball_none";
 		}
 		sLogger.debug(mCombinedAuto);
 
-		fSharedInputValues.setBoolean("ipb_auto_complete", false);
+		sharedInputValues.setBoolean("ipb_auto_complete", false);
 	}
 
 	@Override
@@ -65,7 +65,7 @@ public class AutonomousModeLogic extends AbstractModeLogic {
 		// Check isReady on auto states
 		// This reads the string assembled from the webdashboard and checks it against all possible autos until it finds a match
 		// If it doesn't find a match it does nothing
-		if (!fSharedInputValues.getBoolean("ipb_auto_complete") && fSharedInputValues.getBoolean("ipb_robot_has_been_zeroed")) {
+		if (!sharedInputValues.getBoolean("ipb_auto_complete") && sharedInputValues.getBoolean("ipb_robot_has_been_zeroed")) {
 			return name.equals(mCombinedAuto);
 		}
 
@@ -81,7 +81,7 @@ public class AutonomousModeLogic extends AbstractModeLogic {
 		//Checks the isDone on zero states and determines when autonomous is done
 		if (state.isDone()) {
 			if (name.contains("auto")) {
-				fSharedInputValues.setBoolean("ipb_auto_complete", true);
+				sharedInputValues.setBoolean("ipb_auto_complete", true);
 			}
 			return true;
 		}

@@ -19,9 +19,9 @@ public class StateControls extends AbstractStateControls {
 
 	private static final Logger sLogger = LogManager.getLogger(StateControls.class);
 
-	private final Timer fTimerMode;
-	private final Timer fTimerEndgame;
-	private final boolean fInitialIsManualMode;
+	private final Timer timerMode;
+	private final Timer timerEndgame;
+	private final boolean initialIsManualMode;
 
 	private boolean mIsEndgameMode;
 	private boolean mIsManualMode;
@@ -41,24 +41,24 @@ public class StateControls extends AbstractStateControls {
 		mIsEndgameMode = false;
 		mIsManualMode = false;
 
-		fTimerMode = new Timer();
+		timerMode = new Timer();
 		mFmsMode = FMS.Mode.DISABLED;
 		//Climb
-		fTimerEndgame = new Timer();
+		timerEndgame = new Timer();
 		if (robotConfiguration.contains("general", "initial_teleop_mode")) {
 			switch (robotConfiguration.getString("general", "initial_teleop_mode")) {
 				case "teleop_mode":
-					fInitialIsManualMode = false;
+					initialIsManualMode = false;
 					break;
 				case "manual_mode":
-					fInitialIsManualMode = true;
+					initialIsManualMode = true;
 					break;
 				default:
-					fInitialIsManualMode = false;
+					initialIsManualMode = false;
 					sLogger.error("Mode specified does not exist");
 			}
 		} else {
-			fInitialIsManualMode = false;
+			initialIsManualMode = false;
 		}
 	}
 
@@ -67,9 +67,9 @@ public class StateControls extends AbstractStateControls {
 		mFmsMode = currentFmsMode;
 
 		mIsEndgameMode = false;
-		mIsManualMode = fInitialIsManualMode;
+		mIsManualMode = initialIsManualMode;
 
-		fSharedInputValues.setBoolean("ipb_endgame_enabled", false);
+		sharedInputValues.setBoolean("ipb_endgame_enabled", false);
 	}
 
 	@Override
@@ -78,22 +78,22 @@ public class StateControls extends AbstractStateControls {
 		if (mFmsMode == FMS.Mode.AUTONOMOUS) {
 			setCurrentControlMode(ControlMode.AUTONOMOUS);
 		} else {
-			if (!fTimerMode.isStarted() && fSharedInputValues.getBooleanRisingEdge("ipb_operator_start")) {
-				fTimerMode.start(1000);
-			} else if (fTimerMode.isDone()) {
+			if (!timerMode.isStarted() && sharedInputValues.getBooleanRisingEdge("ipb_operator_start")) {
+				timerMode.start(1000);
+			} else if (timerMode.isDone()) {
 				mIsManualMode = !mIsManualMode;
-				fTimerMode.reset();
-			} else if (!fSharedInputValues.getBoolean("ipb_operator_start")) {
-				fTimerMode.reset();
+				timerMode.reset();
+			} else if (!sharedInputValues.getBoolean("ipb_operator_start")) {
+				timerMode.reset();
 			}
 
-			if (!fTimerEndgame.isStarted() && fSharedInputValues.getBooleanRisingEdge("ipb_operator_back")) {
-				fTimerEndgame.start(1000);
-			} else if (fTimerEndgame.isDone()) {
+			if (!timerEndgame.isStarted() && sharedInputValues.getBooleanRisingEdge("ipb_operator_back")) {
+				timerEndgame.start(1000);
+			} else if (timerEndgame.isDone()) {
 				mIsEndgameMode = !mIsEndgameMode;
-				fTimerEndgame.reset();
-			} else if (!fSharedInputValues.getBoolean("ipb_operator_back")) {
-				fTimerEndgame.reset();
+				timerEndgame.reset();
+			} else if (!sharedInputValues.getBoolean("ipb_operator_back")) {
+				timerEndgame.reset();
 			}
 
 			if (mIsManualMode) {
@@ -110,13 +110,13 @@ public class StateControls extends AbstractStateControls {
 				}
 			}
 
-			fSharedInputValues.setBoolean("ipb_endgame_enabled", mIsEndgameMode);
+			sharedInputValues.setBoolean("ipb_endgame_enabled", mIsEndgameMode);
 		}
-		fSharedInputValues.setString("ips_mode", getCurrentControlMode().toString());
+		sharedInputValues.setString("ips_mode", getCurrentControlMode().toString());
 	}
 
 	@Override
 	public void dispose() {
-		fSharedInputValues.setString("ips_mode", "DISABLED");
+		sharedInputValues.setString("ips_mode", "DISABLED");
 	}
 }

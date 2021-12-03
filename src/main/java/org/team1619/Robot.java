@@ -13,18 +13,18 @@ import org.uacr.shared.abstractions.FMS;
 
 public class Robot extends TimedRobot {
 
-	private final RobotCore fRobot;
+	private final RobotCore robot;
 
 	public Robot() {
-		fRobot = new FrcHardwareRobot() {
+		robot = new FrcHardwareRobot() {
 			@Override
 			protected AbstractStateControls createStateControls() {
-				return new StateControls(fInputValues, fRobotConfiguration);
+				return new StateControls(inputValues, robotConfiguration);
 			}
 
 			@Override
 			protected AbstractModelFactory createModelFactory() {
-				return new RobotModelFactory(fHardwareFactory, fInputValues, fOutputValues, fRobotConfiguration, fObjectsDirectory);
+				return new RobotModelFactory(hardwareFactory, inputValues, outputValues, robotConfiguration, objectsDirectory);
 			}
 		};
 	}
@@ -35,26 +35,26 @@ public class Robot extends TimedRobot {
 
 	@Override
 	public void robotInit() {
-		fRobot.start();
+		robot.start();
 	}
 
 	@Override
 	public void teleopInit() {
-		fRobot.getFms().setMode(FMS.Mode.TELEOP);
+		robot.getFms().setMode(FMS.Mode.TELEOP);
 	}
 
 	@Override
 	public void autonomousInit() {
-		fRobot.getFms().setMode(FMS.Mode.AUTONOMOUS);
+		robot.getFms().setMode(FMS.Mode.AUTONOMOUS);
 	}
 
 	@Override
 	public void disabledInit() {
-		fRobot.getFms().setMode(FMS.Mode.DISABLED);
+		robot.getFms().setMode(FMS.Mode.DISABLED);
 	}
 
 	@Override
 	public void testInit() {
-		fRobot.getFms().setMode(FMS.Mode.TEST);
+		robot.getFms().setMode(FMS.Mode.TEST);
 	}
 }
