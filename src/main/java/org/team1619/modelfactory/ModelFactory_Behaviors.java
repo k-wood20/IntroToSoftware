@@ -14,7 +14,7 @@ import org.uacr.utilities.logging.Logger;
 
 public class ModelFactory_Behaviors extends AbstractModelFactory {
 
-	private static final Logger sLogger = LogManager.getLogger(ModelFactory_Behaviors.class);
+	private static final Logger logger = LogManager.getLogger(ModelFactory_Behaviors.class);
 
 	private final InputValues sharedInputValues;
 	private final OutputValues sharedOutputValues;
@@ -28,7 +28,7 @@ public class ModelFactory_Behaviors extends AbstractModelFactory {
 	}
 
 	public Behavior createBehavior(String name, Config config) {
-		sLogger.trace("Creating behavior '{}' of type '{}' with config '{}'", name, config.getType(), config.getData());
+		logger.trace("Creating behavior '{}' of type '{}' with config '{}'", name, config.getType(), config.getData());
 
 		switch (name) {
 

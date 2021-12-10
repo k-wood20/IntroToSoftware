@@ -9,7 +9,7 @@ import org.uacr.utilities.logging.Logger;
 
 public class RobotModelFactory extends AbstractModelFactory {
 
-	private static final Logger sLogger = LogManager.getLogger(RobotModelFactory.class);
+	private static final Logger logger = LogManager.getLogger(RobotModelFactory.class);
 
 	@Inject
 	public RobotModelFactory(HardwareFactory hardwareFactory, InputValues inputValues, OutputValues outputValues, RobotConfiguration robotConfiguration, ObjectsDirectory objectsDirectory) {

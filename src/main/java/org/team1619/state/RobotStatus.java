@@ -16,7 +16,7 @@ import java.util.Queue;
 
 public class RobotStatus extends AbstractRobotStatus {
 
-	private static final Logger sLogger = LogManager.getLogger(RobotStatus.class);
+	private static final Logger logger = LogManager.getLogger(RobotStatus.class);
 
 	public RobotStatus(InputValues inputValues, RobotConfiguration robotConfiguration) {
 		super(inputValues, robotConfiguration);

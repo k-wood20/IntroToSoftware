@@ -13,7 +13,7 @@ import org.uacr.utilities.logging.Logger;
 
 public class ManualEndgameModeLogic extends AbstractModeLogic {
 
-	private static final Logger sLogger = LogManager.getLogger(ManualEndgameModeLogic.class);
+	private static final Logger logger = LogManager.getLogger(ManualEndgameModeLogic.class);
 
 	public ManualEndgameModeLogic(InputValues inputValues, RobotConfiguration robotConfiguration) {
 		super(inputValues, robotConfiguration);
@@ -21,7 +21,7 @@ public class ManualEndgameModeLogic extends AbstractModeLogic {
 
 	@Override
 	public void initialize() {
-		sLogger.info("***** MANUAL_ENDGAME *****");
+		logger.info("***** MANUAL_ENDGAME *****");
 	}
 
 	@Override

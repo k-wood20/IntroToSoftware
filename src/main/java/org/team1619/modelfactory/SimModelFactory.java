@@ -8,7 +8,7 @@ import org.uacr.utilities.logging.Logger;
 
 public class SimModelFactory extends AbstractSimModelFactory {
 
-	private static final Logger sLogger = LogManager.getLogger(SimModelFactory.class);
+	private static final Logger logger = LogManager.getLogger(SimModelFactory.class);
 
 	@Inject
 	public SimModelFactory(HardwareFactory hardwareFactory, EventBus eventBus, InputValues inputValues, OutputValues outputValues, RobotConfiguration robotConfiguration, ObjectsDirectory objectsDirectory) {

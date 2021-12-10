@@ -13,7 +13,7 @@ import org.uacr.utilities.logging.Logger;
 
 public class ManualTeleopModeLogic extends AbstractModeLogic {
 
-	private static final Logger sLogger = LogManager.getLogger(ManualTeleopModeLogic.class);
+	private static final Logger logger = LogManager.getLogger(ManualTeleopModeLogic.class);
 
 	public ManualTeleopModeLogic(InputValues inputValues, RobotConfiguration robotConfiguration) {
 		super(inputValues, robotConfiguration);
@@ -21,7 +21,7 @@ public class ManualTeleopModeLogic extends AbstractModeLogic {
 
 	@Override
 	public void initialize() {
-		sLogger.info("***** MANUAL_TELEOP *****");
+		logger.info("***** MANUAL_TELEOP *****");
 	}
 
 	@Override

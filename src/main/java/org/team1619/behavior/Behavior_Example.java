@@ -17,31 +17,31 @@ import java.util.Set;
 
 public class Behavior_Example implements Behavior {
 
-	private static final Logger sLogger = LogManager.getLogger(Behavior_Example.class);
-	private static final Set<String> sSubsystems = Set.of("ss_example");
+	private static final Logger logger = LogManager.getLogger(Behavior_Example.class);
+	private static final Set<String> subsystems = Set.of("ss_example");
 
 	private final InputValues sharedInputValues;
 	private final OutputValues sharedOutputValues;
 	private final String whatThisButtonDoes;
-	private Timer mTimer;
+	private Timer timer;
 
-	private int mConfigurationValue;
+	private int configurationValue;
 
 	public Behavior_Example(InputValues inputValues, OutputValues outputValues, Config config, RobotConfiguration robotConfiguration) {
 		sharedInputValues = inputValues;
 		sharedOutputValues = outputValues;
 		whatThisButtonDoes = robotConfiguration.getString("global_example", "what_this_button_does");
 
-		mConfigurationValue = 0;
-		mTimer = new Timer();
+		configurationValue = 0;
+		timer = new Timer();
 	}
 
 	@Override
 	public void initialize(String stateName, Config config) {
-		sLogger.debug("Entering state {}", stateName);
+		logger.debug("Entering state {}", stateName);
 
-		mConfigurationValue = config.getInt("config_key", 0);
-		mTimer.start(mConfigurationValue);
+		configurationValue = config.getInt("config_key", 0);
+		timer.start(configurationValue);
 	}
 
 	@Override
@@ -57,11 +57,11 @@ public class Behavior_Example implements Behavior {
 
 	@Override
 	public boolean isDone() {
-		return mTimer.isDone();
+		return timer.isDone();
 	}
 
 	@Override
 	public Set<String> getSubsystems() {
-		return sSubsystems;
+		return subsystems;
 	}
 }
