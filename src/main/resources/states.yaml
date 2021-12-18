@@ -10,7 +10,7 @@ single_state:
   st_example_default:
     behavior: bh_example
     behavior_config:
-
+      config_key: 1000
 
 done_for_time_state:
 
