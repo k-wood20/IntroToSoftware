@@ -31,6 +31,11 @@ public class RobotStatus extends AbstractRobotStatus {
 	}
 
 	@Override
+	public void disabledUpdate() {
+
+	}
+
+	@Override
 	public void update() {
 		if (!sharedInputValues.getBoolean("ipb_robot_has_been_zeroed")
 				/*&& sharedInputValues.getBoolean("ipb_example_has_been_zeroed")*/) {
