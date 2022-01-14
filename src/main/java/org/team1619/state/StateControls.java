@@ -79,7 +79,8 @@ public class StateControls extends AbstractStateControls {
 			setCurrentControlMode(ControlMode.AUTONOMOUS);
 		} else {
 			if (!timerMode.isStarted() && sharedInputValues.getBooleanRisingEdge("ipb_operator_start")) {
-				timerMode.start(1000);
+				// This is set to 5 seconds to insure we don't go into manual mode during a match by pushing the start button instead of the back button
+				timerMode.start(5000);
 			} else if (timerMode.isDone()) {
 				isManualMode = !isManualMode;
 				timerMode.reset();
