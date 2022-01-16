@@ -2,6 +2,7 @@ import edu.wpi.first.gradlerio.deploy.roborio.RoboRIO
 
 plugins {
     id "java"
+    id "application"
     id "edu.wpi.first.GradleRIO" version "2022.1.1"
 }
 
@@ -11,6 +12,8 @@ sourceCompatibility = JavaVersion.VERSION_11
 targetCompatibility = JavaVersion.VERSION_11
 
 def ROBOT_MAIN_CLASS = 'org.team1619.Robot'
+
+mainClassName = 'org.team1619.Sim'
 
 repositories {
     mavenCentral()
