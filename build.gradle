@@ -16,6 +16,9 @@ def ROBOT_MAIN_CLASS = 'org.team1619.Robot'
 mainClassName = 'org.team1619.Sim'
 
 repositories {
+    maven {
+        url "https://maven.revrobotics.com/"
+    }
     mavenCentral()
     maven {
         url "https://maven.revrobotics.com/"
