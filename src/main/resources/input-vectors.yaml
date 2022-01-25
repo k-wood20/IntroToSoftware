@@ -13,3 +13,10 @@
 #    degrees: true
 #    pnp: pnp-secondary
 
+power_distribution_panel:
+  # module_type must be kCTRE or kRev
+  # device_number must be 0 for kCTRE
+  # device_number must be non-zero for kRev, usually 20.
+  ipv_power_distribution_panel:
+    module_type: kRev
+    device_number: 20
