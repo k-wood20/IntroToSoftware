@@ -51,3 +51,11 @@ global_webdashboard:
 
   match_values:
 
+global_pneumatics:
+  #CTREPCM or REVPH
+  module_type: CTREPCM
+  #CTREPCM: 0
+  #REVPH: 21
+  device_id: 0
+
+
