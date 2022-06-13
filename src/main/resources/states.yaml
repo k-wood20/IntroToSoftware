@@ -1,16 +1,8 @@
 single_state:
 
-# ------ Example ------
+  # ------ Drivetrain ------
 
-  st_example:
-    behavior: bh_example
-    behavior_config:
-      config_key: 1000
-
-  st_example_default:
-    behavior: bh_example
-    behavior_config:
-      config_key: 1000
+  # add the drivetrain state here
 
 done_for_time_state:
 

@@ -32,8 +32,7 @@ public class ModelFactory_Behaviors extends AbstractModelFactory {
 
 		switch (name) {
 
-			case "bh_example":
-				return new Behavior_Example(sharedInputValues, sharedOutputValues, config, robotConfiguration);
+			// add the drivetrain behavior here
 
 			// State not found
 			default:

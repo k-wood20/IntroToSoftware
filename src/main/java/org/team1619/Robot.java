@@ -19,7 +19,7 @@ public class Robot extends TimedRobot {
 		robot = new FrcHardwareRobot() {
 			@Override
 			protected AbstractStateControls createStateControls() {
-				return new StateControls(inputValues, robotConfiguration);
+				return new StateControls(inputValues, outputValues, robotConfiguration);
 			}
 
 			@Override

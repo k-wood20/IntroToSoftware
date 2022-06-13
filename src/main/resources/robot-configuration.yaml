@@ -8,23 +8,24 @@ general:
       priority_level_1: []
     parallels:
        priority_level_1: []
-    ss_example:
-      priority_level_2: []
-      priority_level_1: [st_example]
-      default: [st_example_default]
+    ss_drivetrain:
+      priority_level_1: []
+      default: []
 
 
-  subsystems: [ss_example]
+  subsystems: [ ss_drivetrain ]
 
-  input_booleans: [ipb_operator_right_trigger, ipb_operator_left_trigger]
+  input_booleans: []
 
+  # add the joysticks here
   input_numerics: []
 
   input_vectors: [ ipv_power_distribution_panel ]
 
+  # add the drivetrain motors here
   output_numerics: []
 
-  output_booleans: [opb_example]
+  output_booleans: []
 
 
 global_timing:
@@ -36,8 +37,7 @@ global_timing:
   frame_cycle_time_threshold_core_thread: 80
   frame_cycle_time_threshold_info_thread: 80
 
-global_example:
-  what_this_button_does: ipb_operator_left_trigger
+# add joysticks for the drivetrain here
 
 log:
 #  ips_selected_auto: true
