@@ -41,6 +41,9 @@ public class Drivetrain implements Behavior {
 
 	@Override
 	public void update() {
+		// access the joystick value of the drive axis here
+		// access the joystick value of the rotation axis here
+
 		// set the drive motors here
 		// set the rotation motors here
 	}
