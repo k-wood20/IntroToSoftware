@@ -5,6 +5,7 @@ import org.uacr.robot.AbstractStateControls;
 import org.uacr.robot.ControlMode;
 import org.uacr.shared.abstractions.FMS;
 import org.uacr.shared.abstractions.InputValues;
+import org.uacr.shared.abstractions.OutputValues;
 import org.uacr.shared.abstractions.RobotConfiguration;
 import org.uacr.utilities.Timer;
 import org.uacr.utilities.injection.Inject;
@@ -27,10 +28,10 @@ public class StateControls extends AbstractStateControls {
 	private boolean isManualMode;
 
 	@Inject
-	public StateControls(InputValues inputValues, RobotConfiguration robotConfiguration) {
-		super(inputValues, robotConfiguration);
+	public StateControls(InputValues inputValues, OutputValues outputValues, RobotConfiguration robotConfiguration) {
+		super(inputValues, outputValues, robotConfiguration);
 
-		registerRobotStatus(new RobotStatus(inputValues, robotConfiguration));
+		registerRobotStatus(new RobotStatus(inputValues, outputValues, robotConfiguration));
 		registerModeLogic(ControlMode.AUTONOMOUS, new AutonomousModeLogic(inputValues, robotConfiguration));
 		registerModeLogic(ControlMode.TELEOP, new TeleopModeLogic(inputValues, robotConfiguration));
 		registerModeLogic(ControlMode.MANUAL_TELEOP, new ManualTeleopModeLogic(inputValues, robotConfiguration));

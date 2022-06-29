@@ -2,6 +2,7 @@ package org.team1619.state;
 
 import org.uacr.robot.AbstractRobotStatus;
 import org.uacr.shared.abstractions.InputValues;
+import org.uacr.shared.abstractions.OutputValues;
 import org.uacr.shared.abstractions.RobotConfiguration;
 import org.uacr.utilities.LimitedSizeQueue;
 import org.uacr.utilities.logging.LogManager;
@@ -18,8 +19,8 @@ public class RobotStatus extends AbstractRobotStatus {
 
 	private static final Logger logger = LogManager.getLogger(RobotStatus.class);
 
-	public RobotStatus(InputValues inputValues, RobotConfiguration robotConfiguration) {
-		super(inputValues, robotConfiguration);
+	public RobotStatus(InputValues inputValues, OutputValues outputValues, RobotConfiguration robotConfiguration) {
+		super(inputValues, outputValues, robotConfiguration);
 	}
 
 	@Override

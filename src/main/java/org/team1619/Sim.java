@@ -12,7 +12,7 @@ public class Sim {
 		new FrcSimRobot() {
 			@Override
 			protected AbstractStateControls createStateControls() {
-				return new StateControls(inputValues, robotConfiguration);
+				return new StateControls(inputValues, outputValues, robotConfiguration);
 			}
 
 			@Override

@@ -2,15 +2,12 @@ single_state:
 
 # ------ Example ------
 
-  st_example:
-    behavior: bh_example
+  st_drivetrain:
+    behavior: bh_drivetrain
     behavior_config:
       config_key: 1000
 
-  st_example_default:
-    behavior: bh_example
-    behavior_config:
-      config_key: 1000
+
 
 done_for_time_state:
 
