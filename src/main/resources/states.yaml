@@ -3,6 +3,8 @@ single_state:
   # ------ Drivetrain ------
 
   # add the drivetrain state here
+  st_drivetrain:
+    behavior: bh_drivetrain
 
 done_for_time_state:
 

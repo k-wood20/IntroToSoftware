@@ -10,7 +10,7 @@ general:
        priority_level_1: []
     ss_drivetrain:
       priority_level_1: []
-      default: []
+      default: [ st_drivetrain ]
 
 
   subsystems: [ ss_drivetrain ]
@@ -18,12 +18,15 @@ general:
   input_booleans: []
 
   # add the joysticks here
-  input_numerics: []
+  input_numerics: [ipn_driver_left_x, ipn_driver_left_y]
 
   input_vectors: [ ipv_power_distribution_panel ]
 
   # add the drivetrain motors here
-  output_numerics: []
+  output_numerics: [ opn_drivetrain_front_right_speed, opn_drivetrain_front_left_speed,
+                     opn_drivetrain_back_left_speed, opn_drivetrain_back_right_speed,
+                     opn_drivetrain_front_right_angle_motor, opn_drivetrain_front_left_angle_motor,
+                     opn_drivetrain_back_left_angle_motor, opn_drivetrain_back_right_angle_motor]
 
   output_booleans: []
 
@@ -38,6 +41,10 @@ global_timing:
   frame_cycle_time_threshold_info_thread: 80
 
 # add joysticks for the drivetrain here
+global_drivetrain:
+  drive_axis: ipn_driver_left_y
+  rotate_axis: ipn_driver_left_x
+
 
 log:
 #  ips_selected_auto: true

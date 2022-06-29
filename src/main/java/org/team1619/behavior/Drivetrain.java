@@ -24,14 +24,18 @@ public class Drivetrain implements Behavior {
 	private final OutputValues sharedOutputValues;
 
 	// declare the drive axis here
+	private final String driveAxis;
 	// declare the rotation axis here
+	private final String rotateAxis;
 
 	public Drivetrain(InputValues inputValues, OutputValues outputValues, Config config, RobotConfiguration robotConfiguration) {
 		sharedInputValues = inputValues;
 		sharedOutputValues = outputValues;
 
 		// initialize the drive axis here
+		driveAxis = robotConfiguration.getString("global_drivetrain", "drive_axis");
 		// initialize the rotation axis here
+		rotateAxis = robotConfiguration.getString("global_drivetrain", "rotate_axis");
 	}
 
 	@Override
@@ -42,16 +46,40 @@ public class Drivetrain implements Behavior {
 	@Override
 	public void update() {
 		// access the joystick value of the drive axis here
+		double driveAxis = sharedInputValues.getNumeric(this.driveAxis);
 		// access the joystick value of the rotation axis here
+		double rotateAxis = sharedInputValues.getNumeric(this.rotateAxis);
 
 		// set the drive motors here
+		sharedOutputValues.setNumeric("opn_drivetrain_front_right_speed", "percent", driveAxis);
+		sharedOutputValues.setNumeric("opn_drivetrain_front_left_speed", "percent", driveAxis);
+		sharedOutputValues.setNumeric("opn_drivetrain_back_left_speed", "percent", driveAxis);
+		sharedOutputValues.setNumeric("opn_drivetrain_back_right_speed", "percent", driveAxis);
+
 		// set the rotation motors here
+
+		sharedOutputValues.setNumeric("opn_drivetrain_front_right_angle_motor", "percent", rotateAxis);
+		sharedOutputValues.setNumeric("opn_drivetrain_front_left_angle_motor", "percent", rotateAxis);
+		sharedOutputValues.setNumeric("opn_drivetrain_back_left_angle_motor", "percent", rotateAxis);
+		sharedOutputValues.setNumeric("opn_drivetrain_back_right_angle_motor", "percent", rotateAxis);
 	}
 
 	@Override
 	public void dispose() {
+
 		// set the drive motors to 0 here
+
+		sharedOutputValues.setNumeric("opn_drivetrain_front_right_speed", "percent", 0.0);
+		sharedOutputValues.setNumeric("opn_drivetrain_front_left_speed", "percent", 0.0);
+		sharedOutputValues.setNumeric("opn_drivetrain_back_left_speed", "percent", 0.0);
+		sharedOutputValues.setNumeric("opn_drivetrain_back_right_speed", "percent", 0.0);
+
 		// set the rotation motors here
+
+		sharedOutputValues.setNumeric("opn_drivetrain_front_right_angle_motor", "percent", 0.0);
+		sharedOutputValues.setNumeric("opn_drivetrain_front_left_angle_motor", "percent", 0.0);
+		sharedOutputValues.setNumeric("opn_drivetrain_back_left_angle_motor", "percent", 0.0);
+		sharedOutputValues.setNumeric("opn_drivetrain_back_right_angle_motor", "percent", 0.0);
 	}
 
 	@Override
